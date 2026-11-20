@@ -57,15 +57,25 @@ def get_most_drifted_feature(psi_scores):
     return max(psi_scores, key=psi_scores.get)
 
 
+class JsonFormatter(logging.Formatter):
+
+    def format(self, record):
+        log_data = {
+            "level": record.levelname,
+            "message": record.getMessage(),
+            "logger": record.name
+        }
+        return json.dumps(log_data)
+
+
 def configure_json_logging():
     logger = logging.getLogger("pg_rent")
     logger.setLevel(logging.INFO)
+    logger.propagate = False
 
     if not logger.handlers:
         handler = logging.StreamHandler()
-        handler.setFormatter(logging.Formatter(
-            '{"level":"%(levelname)s","message":"%(message)s"}'
-        ))
+        handler.setFormatter(JsonFormatter())
         logger.addHandler(handler)
 
     return logger
