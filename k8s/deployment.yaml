@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg-rent-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pg-rent-api
+  template:
+    metadata:
+      labels:
+        app: pg-rent-api
+    spec:
+      containers:
+        - name: pg-rent-api
+          image: pg-rent-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
