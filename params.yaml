@@ -1,0 +1,19 @@
+project:
+  group_id: G034
+  problem_id: MP048
+
+data:
+  train_path: data/raw/train.csv
+  later_path: data/raw/later.csv
+  holdout_path: data/raw/holdout_features.csv
+  cleaned_train_path: data/processed/train_clean.csv
+
+model:
+  target: rent_rs
+  random_state: 42
+  test_size: 0.2
+
+monitoring:
+  psi_bins: 10
+  retraining_fraction: 0.70
+  promotion_improvement: 0.10

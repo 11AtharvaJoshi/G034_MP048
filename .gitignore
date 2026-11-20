@@ -1,0 +1,20 @@
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+
+# Testing
+.pytest_cache/
+.coverage
+
+# Environment variables
+.env
+
+# MLflow generated files
+mlruns/
+mlartifacts/
