@@ -102,7 +102,7 @@ def clean_training_data(
 
 def run_cleaning_pipeline(
     input_path: str | Path = "data/raw/train.csv",
-    output_path: str | Path = "data/processed/train_cleaned.csv",
+    output_path: str | Path = "data/processed/train_clean.csv",
 ) -> pd.DataFrame:
     """Ensure raw train.csv is materialized from .dvc/zip, clean it, and save to data/processed/."""
     in_file = ensure_raw_csv(Path(input_path))
@@ -118,4 +118,4 @@ def run_cleaning_pipeline(
 
 if __name__ == "__main__":
     df_clean = run_cleaning_pipeline()
-    print(f"Saved cleaned dataset to data/processed/train_cleaned.csv with shape {df_clean.shape}")
+    print(f"Saved cleaned dataset to data/processed/train_clean.csv with shape {df_clean.shape}")
