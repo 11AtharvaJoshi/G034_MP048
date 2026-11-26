@@ -1,11 +1,11 @@
 {
     "psi_scores": {
-        "distance_to_campus_km": 0.028724892706743874,
-        "room_area_sqft": 0.020776473913986838,
-        "sharing": 0.010656807280060463,
-        "meals_per_day": 0.017877312923332594,
-        "building_age_yr": 6.962152300577378,
-        "wifi_mbps": 0.0786980277063148
+        "distance_to_campus_km": 0.029319549778963446,
+        "room_area_sqft": 0.02420481521292022,
+        "sharing": 0.010274808105966975,
+        "meals_per_day": 0.018002881521398888,
+        "building_age_yr": 7.085709572817362,
+        "wifi_mbps": 0.016291426182964953
     },
     "most_drifted_feature": "building_age_yr",
     "overall_v1_mae": 1907.3318038129003,

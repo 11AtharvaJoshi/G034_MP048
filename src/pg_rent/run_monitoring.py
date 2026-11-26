@@ -27,7 +27,7 @@ def run_monitoring():
 
     config = load_config()
 
-    train_path = project_root / config["data"]["train_path"]
+    train_path = project_root / config["data"]["cleaned_train_path"]
     later_path = project_root / config["data"]["later_path"]
 
     reports_dir = project_root / "reports"
@@ -50,7 +50,13 @@ def run_monitoring():
     print("Later data:", later_df.shape)
 
     # Step 5: Calculate PSI
-    psi_scores = calculate_all_psi(train_df, later_df)
+    psi_bins = config["monitoring"]["psi_bins"]
+
+    psi_scores = calculate_all_psi(
+       train_df,
+       later_df,
+       bins=psi_bins
+    )
 
     most_drifted = get_most_drifted_feature(psi_scores)
 

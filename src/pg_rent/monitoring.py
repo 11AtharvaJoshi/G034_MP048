@@ -37,9 +37,9 @@ def calculate_psi(reference, current, bins=10):
                   np.log(cur_pct / ref_pct)).sum())
 
 
-def calculate_all_psi(train, later):
+def calculate_all_psi(train, later, bins=10):
     return {
-        feature: calculate_psi(train[feature], later[feature])
+        feature: calculate_psi(train[feature], later[feature], bins=bins)
         for feature in FEATURES
     }
 
