@@ -1,0 +1,17 @@
+{
+    "psi_scores": {
+        "distance_to_campus_km": 0.028724892706743874,
+        "room_area_sqft": 0.020776473913986838,
+        "sharing": 0.010656807280060463,
+        "meals_per_day": 0.017877312923332594,
+        "building_age_yr": 6.962152300577378,
+        "wifi_mbps": 0.0786980277063148
+    },
+    "most_drifted_feature": "building_age_yr",
+    "overall_v1_mae": 1907.3318038129003,
+    "mae_by_locality": {
+        "Market Side": 3264.30628441815,
+        "Sector East": 1322.3458734083151,
+        "Sector West": 1308.4524838569585
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "v1_mae": 1896.7296637537602,
+    "v2_mae": 1665.7530424151137,
+    "improvement_percentage": 12.177624769231883,
+    "promotion_threshold_percentage": 10.0,
+    "decision": "promote",
+    "v2_training_rows": 1210,
+    "later_training_rows": 210,
+    "evaluation_rows": 90,
+    "evaluation_start_date": "2026-08-12",
+    "evaluation_end_date": "2026-08-31",
+    "mlflow_run_id": "60014bcaf24c405e9cbe87655e3e7d8f",
+    "registered_version": 3
+}

@@ -96,21 +96,37 @@ def build_preprocessor():
     return preprocessor
 
 
+
 def get_models(random_state=42):
-    """Return candidate regression models."""
+    """Return candidate models with different hyperparameter settings."""
 
     models = {
-        "LinearRegression": LinearRegression(),
+        "LinearRegression_Default": LinearRegression(),
 
-        "RandomForest": RandomForestRegressor(
-            n_estimators=200,
-            max_depth=12,
+        "RandomForest_100": RandomForestRegressor(
+            n_estimators=100,
+            max_depth=8,
+            min_samples_split=2,
+            random_state=random_state,
+            n_jobs=-1
+        ),
+
+        "RandomForest_300": RandomForestRegressor(
+            n_estimators=300,
+            max_depth=15,
             min_samples_split=4,
             random_state=random_state,
             n_jobs=-1
         ),
 
-        "HistGradientBoosting": HistGradientBoostingRegressor(
+        "HistGradientBoosting_100": HistGradientBoostingRegressor(
+            max_iter=100,
+            learning_rate=0.05,
+            max_leaf_nodes=15,
+            random_state=random_state
+        ),
+
+        "HistGradientBoosting_200": HistGradientBoostingRegressor(
             max_iter=200,
             learning_rate=0.08,
             max_leaf_nodes=15,
@@ -250,18 +266,16 @@ def register_best_model(best_model, best_model_name, best_mae, data_sha256):
 
 
 def main():
-    """Run the complete v1 model training pipeline."""
+    """Run model experiments without registering a new model."""
 
-    config = load_config()
-
-    print("Starting MP048 model training...")
+    print("Starting MP048 model experiments...")
 
     # Step 1: Load cleaned training data
     df, data_sha256 = load_training_data()
 
     print("Dataset loaded:", df.shape)
 
-    # Step 2: Split the dataset
+    # Step 2: Split dataset
     X_train, X_test, y_train, y_test = split_dataset(df)
 
     print("Training records:", len(X_train))
@@ -276,23 +290,10 @@ def main():
         data_sha256
     )
 
-    # Refit the selected model on the complete cleaned dataset
-    best_model.fit(
-        df[NUMERIC_FEATURES + CATEGORICAL_FEATURES],
-        df[config["model"]["target"]]
-    )
+    print("\nBest Model:", best_model_name)
+    print("Best MAE:", round(results[best_model_name], 2))
 
-    # Step 4: Register the best model
-    best_mae = results[best_model_name]
-
-    register_best_model(
-        best_model,
-        best_model_name,
-        best_mae,
-        data_sha256
-    )
-
-    print("\nTraining completed successfully!")
+    print("\nExperiments completed successfully!")
 
 
 if __name__ == "__main__":
