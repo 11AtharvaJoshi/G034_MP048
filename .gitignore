@@ -18,3 +18,5 @@ venv/
 # MLflow generated files
 mlruns/
 mlartifacts/
+
+.dvc/credentials/
