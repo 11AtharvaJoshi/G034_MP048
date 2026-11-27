@@ -23,7 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install "dvc==3.67.1" "dvc-gdrive==3.0.1"
-
+          pip install "cryptography==43.0.3" "pyOpenSSL==24.2.1"
+      - name: Verify Google Drive dependencies
+        run: |
+          python -c "import cryptography, OpenSSL; print('cryptography:', cryptography.__version__); print('pyOpenSSL:', OpenSSL.__version__)"
       - name: Authenticate and pull DVC datasets
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
