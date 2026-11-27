@@ -66,3 +66,21 @@ Mean Absolute Error (MAE).
 - predictions/: Final predictions
 - reports/: Project findings
 - k8s/: Kubernetes configurations
+
+### MLflow Model Registry Notes
+
+The registered model `PG_Rent_Prediction` contains three versions:
+
+| Version | Description |
+|---|---|
+| 1 | Original v1 model |
+| 2 | Duplicate registration of the original v1 model |
+| 3 | Retrained v2 candidate |
+
+The retrained v2 candidate is registered as version 3 because version 2 was already occupied by a duplicate registration of v1.
+
+The `champion` alias points to version 3, which is the actual retrained model.
+
+The v2 candidate achieved an MAE of 1665.75 compared with 1896.73 for v1 on the same evaluation dataset, representing a 12.18% improvement. This exceeds the required 10% promotion threshold.
+
+The existing registry history has been preserved rather than deleting or modifying previous model versions.

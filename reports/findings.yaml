@@ -1,11 +1,10 @@
 # MP048 findings --- fill in every value, keep every key.
 # The marking tool reads this file. Write null only where the comment says so.
 # Use the exact column names and group values from your data files.
-
-group_id: "G034"          # your group id, e.g. "G042"
+# MP048 findings
+group_id: "G034"
 problem_id: "MP048"
 
-data_issues:
 data_issues:
   leaking_column:
     present: true
@@ -43,25 +42,28 @@ data_issues:
     true_levels: 3
 
 tracking:
-  experiment_name: null
-  best_run_id: null        # the MLflow run id of your v1 model
-  registered_model_name: null
-  champion_version: null
+  experiment_name: MP048_PG_Rent_Prediction
+  best_run_id: 7622b0580b444088b8d13ede4235e4ef
+  registered_model_name: PG_Rent_Prediction
+  champion_version: 3
 
 monitoring:
-  psi:                     # cleaned train.csv vs later.csv, 10 bins
-    distance_to_campus_km: null
-    room_area_sqft: null
-    sharing: null
-    meals_per_day: null
-    building_age_yr: null
-    wifi_mbps: null
-  most_drifted_feature: null
-  mae_by_group:            # v1 on later.csv, per value of locality
-    'Sector East': null
-    'Sector West': null
-    'Market Side': null
-  worst_served_group: null
-  mae_v1_on_check: null    # v1 on the last 30% of later.csv (by date)
-  mae_v2_on_check: null    # v2 on the same rows
-  decision: null           # promote or keep
+  psi:
+    distance_to_campus_km: 0.029320
+    room_area_sqft: 0.024205
+    sharing: 0.010275
+    meals_per_day: 0.018003
+    building_age_yr: 7.085710
+    wifi_mbps: 0.016291
+
+  most_drifted_feature: building_age_yr
+
+  mae_by_group:
+    'Sector East': 1322.35
+    'Sector West': 1308.45
+    'Market Side': 3264.31
+
+  worst_served_group: Market Side
+  mae_v1_on_check: 1896.729664
+  mae_v2_on_check: 1665.753042
+  decision: promote
