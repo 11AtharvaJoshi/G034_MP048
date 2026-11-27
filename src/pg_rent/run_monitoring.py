@@ -46,8 +46,8 @@ def run_monitoring():
     train_df = pd.read_csv(train_path)
     later_df = pd.read_csv(later_path)
 
-    print("Training data:", train_df.shape)
-    print("Later data:", later_df.shape)
+    logger.info(f"Training data shape: {train_df.shape}")
+    logger.info(f"Later data shape: {later_df.shape}")
 
     # Step 5: Calculate PSI
     psi_bins = config["monitoring"]["psi_bins"]
@@ -60,12 +60,12 @@ def run_monitoring():
 
     most_drifted = get_most_drifted_feature(psi_scores)
 
-    print("\nPSI Results:")
-
+    logger.info("PSI Results:")
+    
     for feature, score in psi_scores.items():
-        print(f"{feature}: {score:.6f}")
-
-    print("\nMost drifted feature:", most_drifted)
+        logger.info(f"PSI for {feature}: {score:.6f}")
+        
+        logger.info(f"Most drifted feature: {most_drifted}")
 
     # Step 6: Load original v1 model
     model_uri = "models:/PG_Rent_Prediction/1"
@@ -87,14 +87,13 @@ def run_monitoring():
     # Step 9: Calculate MAE by locality
     mae_by_locality = calculate_mae_by_locality(performance_df)
 
-    print("\nV1 MAE by locality:")
-
+    logger.info("V1 MAE by locality:")
     for locality, mae in mae_by_locality.items():
-        print(f"{locality}: {mae:.2f}")
+        logger.info(f"{locality}: {mae:.2f}")
 
     overall_mae = (y_later - predictions).__abs__().mean()
 
-    print(f"\nOverall V1 MAE: {overall_mae:.2f}")
+    logger.info(f"Overall V1 MAE: {overall_mae:.2f}")
 
     # Step 10: Save monitoring report
     monitoring_report = {
@@ -114,7 +113,7 @@ def run_monitoring():
 
     logger.info("Monitoring completed successfully")
 
-    print("\nMonitoring report saved to:", report_path)
+    logger.info(f"Monitoring report saved to: {report_path}")
 
 
 if __name__ == "__main__":

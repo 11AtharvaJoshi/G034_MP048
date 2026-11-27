@@ -1,20 +1,21 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pg-rent-api
+  name: mp048-api
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
-      app: pg-rent-api
+      app: mp048-api
   template:
     metadata:
       labels:
-        app: pg-rent-api
+        app: mp048-api
     spec:
       containers:
-        - name: pg-rent-api
-          image: pg-rent-api:latest
+        - name: mp048-api
+          image: mp048-api:1.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
@@ -22,7 +23,11 @@ spec:
             httpGet:
               path: /health
               port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /health
               port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 15
